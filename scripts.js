@@ -52,10 +52,10 @@ function shuffleDeck(){
 
 
 function placeCard(card, who, slot){
-	// var currId = who + '-card-' + slot;
+
 	var currId = '#' + who + '-card-' + slot;
 	
-	// var theDivWithTheCardWeWantToReplace =document.getElementById(currId);
+	// Can also use JS: var theDivWithTheCardWeWantToReplace =document.getElementById(currId);
 	$(currId).removeClass('empty');
 	// theDivWithTheCardWeWantToReplace.className = "card";
 	// var dealerCardOne = $('$dealer-card-one');
@@ -113,13 +113,14 @@ function calculateTotal(hand, who){
 		if (hand[i] === 1) {
 			hand.push(hand[i])
 			hand.splice(i, 1)
+
 			if( i !== hand.length) {
 				i--
 			}
 		}
 	}
 
-	for(i=0; i< hand.length; i++){
+	for(i=0; i < hand.length; i++){
 		var cardValue = Number(hand[i].slice(0, -1)); //-1 is the number from the end, instead of form the beginning
 			if(cardValue > 10) {
 				cardValue = 10
@@ -190,13 +191,18 @@ function checkWin(){
 	//get dealer total
 	//who is higher but less than 21
 	//set up a message
+	var winCount = 0
+
 	var playerTotal = calculateTotal(playerHand, 'player')
 	var dealerTotal = calculateTotal(dealerHand, 'dealer')
 	if ((playerTotal > dealerTotal) && (playerTotal < 22)) {
 		document.getElementById('message').innerHTML = "You have Won"
-		// var previousWins = document.getElementById('0').innerHTML
+		// var previousWins = document.getElementById('dealer-total').innerHTML
 		// var presentWins = parseInt(previousWins) + 1;
-		// document.getElementById('0').innerHTML = presentWins;
+		// alert("win plus one");
+		// document.getElementById('dealer-total').innerHTML = presentWins;
+		winCount = winCount + 1
+		$('#win-count').html(winCount);
 	}
 	else if((dealerTotal > playerTotal) && (playerTotal < 22) && (dealerTotal < 22)) {
 		document.getElementById('message').innerHTML = "Dealer wins"
@@ -217,6 +223,7 @@ function reset() {
 	//reset the message
 	//reset all the cards (divs and the empty class)
 	document.location.href = " "
+	deck = 0
 	
 }
 
