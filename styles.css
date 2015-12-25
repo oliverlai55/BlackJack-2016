@@ -1,5 +1,5 @@
 body{
-	background: url(blackjacktable.jpg)  no-repeat top center fixed;
+	background: url(img/blackjacktable.jpg)  no-repeat top center fixed;
 	background-size: cover;
 }
 
@@ -10,6 +10,8 @@ body{
 	border-radius: 10px;
 	margin: auto;
 	margin-top: 17%;
+	border: solid;
+	padding: 3%;
 }
 
 #win-loss{

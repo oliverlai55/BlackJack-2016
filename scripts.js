@@ -62,8 +62,6 @@ function placeCard(card, who, slot){
 	// theDivWithTheCardWeWantToReplace.className = "card";
 	// var dealerCardOne = $('$dealer-card-one');
 
-
-
 	if (card.indexOf("h") !== -1 ){
 		var suit = "h";
 	}
