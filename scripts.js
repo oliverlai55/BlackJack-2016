@@ -4,6 +4,8 @@ var playerTotalCards = 2;
 var dealerTotalCards = 2;
 var playerHand;
 var dealerHand;
+var gameIsOver = false;
+var winCount = 0
 
 function shuffleDeck(){
 	var deck =[];
@@ -138,8 +140,6 @@ function calculateTotal(hand, who){
 		}
 
 		
-	
-			
 		//total += cardValue
 	var idWhoToGet = who + '-total';
 	document.getElementById(idWhoToGet).innerHTML = total;
@@ -191,7 +191,7 @@ function checkWin(){
 	//get dealer total
 	//who is higher but less than 21
 	//set up a message
-	var winCount = 0
+
 
 	var playerTotal = calculateTotal(playerHand, 'player')
 	var dealerTotal = calculateTotal(dealerHand, 'dealer')
@@ -214,17 +214,37 @@ function checkWin(){
 
 
 function reset() {
+	deck = 0;
 	//empty the deck
+
+	placeInDeck = 0;
 	// reset the place in the deck
-	//reset the players total cards
-	//reset the dealers total cards
+
+	playerHand = [];
 	//reset the players hand array
+
+	dealerHand = [];
 	//reset the dealers hand array
+
+	playerTotalCards = 2;
+	//reset the players total cards
+
+	dealerTotalCards = 2;
+	//reset the dealers total cards
+
+	$('#message').html("")
 	//reset the message
-	//reset all the cards (divs and the empty class)
-	document.location.href = " "
-	deck = 0
 	
+	$('#player-total').html(0);
+	$('#dealer-total').html(0);
+
+	//reset all the cards (divs and the empty class)
+	var cardSpace = $('.card');
+	cardSpaces.each(function(){
+		$(this).addClass('empty');
+		$(this).html('-');
+	});
+
 }
 
 
@@ -251,12 +271,7 @@ function stand (){
 }
 
 
-function setName(){
-	var name = "Rob";
-	return name
-}
 
-var name = setName(); //it is a function
 
 
 
