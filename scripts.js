@@ -234,18 +234,17 @@ function reset() {
 
 	$('#message').html("")
 	//reset the message
-	
+
 	$('#player-total').html(0);
 	$('#dealer-total').html(0);
 
 	//reset all the cards (divs and the empty class)
-	var cardSpace = $('.card');
-	cardSpaces.each(function(){
-		$(this).addClass('empty');
-		$(this).html('-');
-	});
+	$('.card').addClass('empty');
+	$('.card').html('-');
+	
+	};
 
-}
+
 
 
 function stand (){
