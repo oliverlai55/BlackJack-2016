@@ -109,7 +109,7 @@ function bust(who){
 function calculateTotal(hand, who){
 	var total = 0;
 
-	for (i-0; i < hand.length; i++) {
+	for (i=0; i < hand.length; i++) {
 		if (hand[i] === 1) {
 			hand.push(hand[i])
 			hand.splice(i, 1)
