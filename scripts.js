@@ -11,20 +11,43 @@ function shuffleDeck(){
 	var deck =[];
 	//fill our deck, in order (for now)
 	//suit 
-	var suit = "";
+	var suit;
 	for(s = 1; s <= 4; s++){
 		if(s === 1){
-			suit = "h";
+			suit = '<img style="heigth:30px; width:30px;" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRnoX6Anc9Yz80CPF8mbBun9QgYiCzJ52yckKTPZLriDxiO7CUz">';
 		}else if(s === 2){
-			suit = "s";
+			suit = '<img style="heigth:30px; width:30px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQb67elR6XlBtqYoxI55eFZu9t78COJeEPX71Wm2Y_Pb8w4x19">';
 		}else if(s === 3){
-			suit = "d";
+			suit = '<img style="heigth:30px; width:30px;" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTgqOmctz_qmRiH4VB_19djpmvaUeEtyGWBei_aZM1TlgQeju0K">';
 		}else if(s === 4){
-			suit = "c";
+			suit = '<img style="heigth:30px; width:30px;" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRP6Mgkux8OzT1mfIt-hV0jvhYX9xpA9I1V-rJzXonNnjxquIEfJQ">';
 		}
 		//card number
-		for(i = 1; i <= 13; i++){
-			deck.push(i+suit);
+		for(i = 1;i <= 13; i++){
+			switch (true) {
+				case (i === 1):
+					deck.push("A"+suit)
+				break;
+				case ((i > 1) && (i < 11)):
+					deck.push(i+suit);
+				break;
+				case ((i >= 11) && (i <=13)):
+					switch(i) {
+						case 11:
+							deck.push("J"+suit);
+							break;
+						case 12:
+							deck.push("Q"+suit);
+							break;
+						case 13:
+							deck.push("K"+suit);
+							break;
+					}
+				break;
+				default:
+					alert("Error out of deck array index!");
+					break;
+			}
 		}
 	}
 	console.log(deck);
@@ -32,11 +55,7 @@ function shuffleDeck(){
 	// var numberOfTimesToShuffle = Math.floor( Math.random() * 500 + 500);
 	var numberOfTimesToShuffle = 2000;
 
-// Math.random() // Create a random 16 digit number between 0 and 1
-// //eg .89745839857324985
-// .89745839857324985 * 500 = 450.745839857324985
-// 450.745839857324985 + 500 = 950.745839857324985
-// 950
+
 
 	//Shuffle the deck
 	for(i = 0; i < numberOfTimesToShuffle; i++){
@@ -108,36 +127,34 @@ function bust(who){
 
 function calculateTotal(hand, who){
 	var total = 0;
+	var AcesCount = 0;
+	// get the valuel of each element in the user's hand array
+	for(i=0;i < hand.length;i++) {
+		// slice the letter of the array element
+		var cardValue = hand[i].slice(0, hand[i].indexOf("<"));
 
-	for (i=0; i < hand.length; i++) {
-		if (hand[i] === 1) {
-			hand.push(hand[i])
-			hand.splice(i, 1)
-
-			if( i !== hand.length) {
-				i--
+		// check if card value is a face card or ace and set value
+		if(isNaN(cardValue)){
+			if(cardValue == 'A') {
+				cardValue = 11;
+				AcesCount++;
+			} else {
+				cardValue = 10;
 			}
 		}
+
+		// make sure card value is number and add it to total
+		cardValue = Number(cardValue);
+		total += cardValue;
+
+		// handle aces being 1 or 11
+		while((AcesCount > 0) && (total > 21)){
+			AcesCount--;
+			total -= 10;
+		}
+
 	}
-
-	for(i=0; i < hand.length; i++){
-		var cardValue = Number(hand[i].slice(0, -1)); //-1 is the number from the end, instead of form the beginning
-			if(cardValue > 10) {
-				cardValue = 10
-			if(cardValue = 1) {
-				if(total + 11 < 22) {
-					cardValue = 11
-				}
-				else if(total + 11 > 21) {
-					cardValue = 1
-				}
-			}
-			}
-
-			total = total + cardValue;
-		}
-
-		
+	
 		//total += cardValue
 	var idWhoToGet = who + '-total';
 	document.getElementById(idWhoToGet).innerHTML = total;
@@ -201,6 +218,8 @@ function checkWin(){
 		// document.getElementById('dealer-total').innerHTML = presentWins;
 		winCount = winCount + 1
 		$('#win-count').html(winCount);
+	}else if((dealerTotal == playerTotal) && (playerTotal < 22) && (dealerTotal < 22)){
+		document.getElementById('message').innerHTML = "Tied!"
 	}
 	else if((dealerTotal > playerTotal) && (playerTotal < 22) && (dealerTotal < 22)) {
 		document.getElementById('message').innerHTML = "Dealer wins"
