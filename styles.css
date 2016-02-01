@@ -1,6 +1,7 @@
 body{
 	background: url(img/blackjacktable.jpg)  no-repeat top center fixed;
 	background-size: cover;
+	font-family: arial;
 }
 
 
@@ -33,6 +34,7 @@ body{
 	width: 30px;
 	padding: 10px;
 	margin: 10px;
+	font-size: 20px
 }
 
 .card.empty{
