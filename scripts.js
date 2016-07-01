@@ -7,10 +7,12 @@ var dealerHand;
 var gameIsOver = false;
 var winCount = 0
 
+
+
 function shuffleDeck(){
 	var deck =[];
 	//fill our deck, in order (for now)
-	//suit 
+	//suit
 	var suit;
 	for(s = 1; s <= 4; s++){
 		if(s === 1){
@@ -75,7 +77,7 @@ function shuffleDeck(){
 function placeCard(card, who, slot){
 
 	var currId = '#' + who + '-card-' + slot;
-	
+
 	// Can also use JS: var theDivWithTheCardWeWantToReplace =document.getElementById(currId);
 	$(currId).removeClass('empty');
 	// theDivWithTheCardWeWantToReplace.className = "card";
@@ -108,7 +110,7 @@ function placeCard(card, who, slot){
 		// theDivWithTheCardWeWantToReplace.innerHTML = card;
 		$(currId).html(card);
 		//document.getElementById(currId).innerHTML = card;
-	
+
 }
 
 
@@ -154,7 +156,7 @@ function calculateTotal(hand, who){
 		}
 
 	}
-	
+
 		//total += cardValue
 	var idWhoToGet = who + '-total';
 	document.getElementById(idWhoToGet).innerHTML = total;
@@ -193,7 +195,7 @@ function hit(){
 	else if(playerTotalCards === 5) { slot = "six";}
 
 	placeCard(deck[placeInDeck],'player',slot);
-	playerHand.push(deck[placeInDeck]); 
+	playerHand.push(deck[placeInDeck]);
 	playerTotalCards++;
 	placeInDeck++;
 	calculateTotal(playerHand, 'player');
@@ -224,7 +226,7 @@ function checkWin(){
 	else if((dealerTotal > playerTotal) && (playerTotal < 22) && (dealerTotal < 22)) {
 		document.getElementById('message').innerHTML = "Dealer wins"
 	}
-	
+
 
 }
 
@@ -258,7 +260,7 @@ function reset() {
 	//reset all the cards (divs and the empty class)
 	$('.card').addClass('empty');
 	$('.card').html('-');
-	
+
 	};
 
 
@@ -285,17 +287,3 @@ function stand (){
 	checkWin();
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
