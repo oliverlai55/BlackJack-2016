@@ -1,0 +1,99 @@
+body{
+	background: url(img/blackjacktable.jpg)  no-repeat top center fixed;
+	background-size: cover;
+	font-family: arial;
+}
+
+
+#the-table{
+	/*background: green;*/
+	max-width: 600px;
+	border-radius: 10px;
+	margin: auto;
+	margin-top: 17%;
+	border: solid;
+	padding: 3%;
+}
+
+#win-loss{
+	background-color: red;
+	width: 15%;
+	margin: auto;
+	color: white;
+	text-align: center;
+}
+
+#win-count{
+	display: inline;
+}
+
+.card{
+	color: black;
+	background: white;
+	height: 60px;
+	width: 30px;
+	padding: 10px;
+	margin: 10px;
+	font-size: 20px
+}
+
+.card.empty{
+	/*background: gray;*/
+	background: transparent;
+	/*border: dashed 1px black;*/
+	color:green;
+}
+
+#dealer-hand, #players-hand{
+	overflow: hidden;
+}
+
+#dealer-hand .card{
+	float: left;
+}
+
+#players-hand .card{
+	float: left;
+}
+
+#dealer-total-wrapper, #player-total-wrapper{
+	float: left;
+	height: 60px;
+	line-height: 30px;
+	text-align: center;
+	vertical-align: middle;
+	margin: 10px;
+	padding: 10px;
+	color: white;
+	font-size: 25px;
+}
+
+#dealer-total, #player-total{
+
+}
+
+#play-buttons{
+	overflow: hidden;
+}
+
+#draw-button{
+	margin-left: 10%;
+}
+
+#draw-button, #hit-button, #stand-button, #reset-button {
+	width: 12%;
+	float: left;
+	text-align: center;
+	background-color: #0f0f0f;
+	color: white;
+	margin-top: 20px;
+	margin-right: 10%;
+	margin-bottom: 10px;
+	/*margin: 20px 10% 10px 0px;*/
+}
+
+#message{
+	color: white;
+	font-size: 20px;
+	text-align: center;
+}
