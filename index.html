@@ -6,150 +6,38 @@
 	<title></title>
 	<link rel="stylesheet" href="">
 </head>
-
-</html>
-<script type="text/javascript" src="scripts.js"></script>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
-
 <body>
-	
-
-<div id="the-table">
-
-	<div id="win-loss">Wins: <div id="win-count">0</div></div>
-
-	<div id="dealer-hand">
-		<div id="dealer-total-wrapper">Dealer Total<div id="dealer-total">0</div></div>
-		<!-- it is both classes: card and empty -->
-		<div id="dealer-card-one" class="card empty">-</div>
-		<div id="dealer-card-two" class="card empty">-</div>
-		<div id="dealer-card-three" class="card empty">-</div>
-		<div id="dealer-card-four" class="card empty">-</div>
-		<div id="dealer-card-five" class="card empty">-</div>
-		<div id="dealer-card-six" class="card empty">-</div>
+	<div id="the-table">
+		<div id="win-loss">Wins: <div id="win-count">0</div></div>
+		<div id="dealer-hand">
+			<div id="dealer-total-wrapper">Dealer Total<div id="dealer-total">0</div></div>
+			<!-- it is both classes: card and empty -->
+			<div id="dealer-card-one" class="card empty">-</div>
+			<div id="dealer-card-two" class="card empty">-</div>
+			<div id="dealer-card-three" class="card empty">-</div>
+			<div id="dealer-card-four" class="card empty">-</div>
+			<div id="dealer-card-five" class="card empty">-</div>
+			<div id="dealer-card-six" class="card empty">-</div>
+		</div>
+		<div id="players-hand">
+			<div id="player-total-wrapper">Player Total<div id="player-total">0</div></div>
+			<div id="player-card-one" class="card empty">-</div>
+			<div id="player-card-two" class="card empty">-</div>
+			<div id="player-card-three" class="card empty">-</div>
+			<div id="player-card-four" class="card empty">-</div>
+			<div id="player-card-five" class="card empty">-</div>
+			<div id="player-card-six" class="card empty">-</div>
+		</div>
+		<div id="play-buttons">
+			<button id="draw-button" onclick="deal()">Deal</button>
+			<button id="hit-button" onclick="hit()">Hit</button>
+			<button id="stand-button" onclick="stand()">Stand</button>
+			<button id="reset-button" onclick="reset()">Reset</button>
+		</div>
+		<div id="message"></div>
 	</div>
-
-	<div id="players-hand">
-		<div id="player-total-wrapper">Player Total<div id="player-total">0</div></div>
-		<div id="player-card-one" class="card empty">-</div>
-		<div id="player-card-two" class="card empty">-</div>
-		<div id="player-card-three" class="card empty">-</div>
-		<div id="player-card-four" class="card empty">-</div>
-		<div id="player-card-five" class="card empty">-</div>
-		<div id="player-card-six" class="card empty">-</div>
-	</div>
-
-	<div id="play-buttons">
-		<button id="draw-button" onclick="deal()">Deal</button>
-		<button id="hit-button" onclick="hit()">Hit</button>
-		<button id="stand-button" onclick="stand()">Stand</button>
-		<button id="reset-button" onclick="reset()">Reset</button>
-	</div>
-
-	<div id="message"></div>
-
-</div>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="scripts.js"></script>
 </body>
-<!-- 
-Steps:
-Set up the HTML
--	Create an id for the table to turn it green and wrapper it
--	Create an id for the dealers hand and the players hand
--	Create an id for each card in the dealers hand and the players hand
--	Assign a class to each card so they can be styled correctly
--	Assign a class of empty to each card 
-o	Add a dashed border to this
-o	We will remove the class when the card is assigned
--	Float the dealers hand cards left
--	Float the players hand cards left
--	Set the overflow to hidden on the players and dealers hand
--	Add some padding to the cards
--	Add a wrapper for the dealer total and player total
--	Add a div specifically for the total score for each
--	Set up the action buttons
-o	Deal
-o	Hit
-o	Stand
-Style
-JavaScript
--	Set onclick for deal
-o	Call deal function
-o	Deal should call shuffleDeck and assign to deck
-•	Create shuffleDeck that returns shuffled deck
-•	Outer loop = suits
-•	Inner Loop = cards
-•	Shuffle by swapping 2 cards in the array
-o	Set up players starting hand and dealers starting hand
-o	Create placeCard function that 
-•	takes 
-•	The card
-•	Who’s Turn
-•	Slot it should be in
-•	When called, it should change the div text and class
--	Set onlick for hit
-o	Call placeCard and send the next card in the deck 
-•	As incremented by global placeInDeck
-o	Send player and the factored slot
-•	Could also write a loop that would check for first open spot instead of sending the slot in function
-o	Add card to players hand
-o	Increment playerTotalCards and placeInDeck
-o	calculateTotal
-•	Takes hand
-•	Update the total the player has
-•	Set up a for loop to run through the hand
-•	Drop the last char of each because it’s the suit
-•	Add the card value to the total
-•	If it’s over 21, call bust
-•	Create busts
-o	Check who
-o	Change innerHTML of message
-o	Now we need a reset()
-•	Let’s put it at the top of deal
-•	Reset all vars
-•	Run a loop to clear out the displayed cards
--	Set onlick for stand
-o	Do nothing for player
-o	Run computerTurn
-•	Check if the computer has 17 or more
-•	Add a “who” to the param of calculate total
-•	Run a while loop
-•	Same procedure as player
-•	Once we exit the loop, we know the dealer has at least 17
-•	Call checkWin
-o	Get win count
-o	Get values of both hands 
-•	Could do a global
-o	Check if dealer busted (we know the player hans’t or they couldn’t be this far)
-•	Call bust
-•	Increment win count for player
-o	Check who has more
-•	If user 
-•	display message
-•	increment win for player
-•	If dealer
-•	display message
-•	reduce win for player
-•	if tie
-•	display message
-o	Add winCount to bust
-
-
-Homework Ideas: 
-1.	Fix 11-13 and 1
-2.	Create a delay on the draw
-3.	Change it from wins to $wager amount
-4.	Add a wager dialogue (prompt or form)
-5.	Color code the card based on suit
-6.	Change 1 to A
-7.	Add 1 or 11 logic to player
-8.  Add 1 or 11 logic to dealer
-9.	Add multiple players 
- -->
-
-
-
-
-
+</html>

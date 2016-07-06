@@ -7,8 +7,6 @@ var dealerHand;
 var gameIsOver = false;
 var winCount = 0
 
-
-
 function shuffleDeck(){
 	var deck =[];
 	//fill our deck, in order (for now)
